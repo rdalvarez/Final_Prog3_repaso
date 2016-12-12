@@ -32,7 +32,6 @@ class Login
 
 			for ($i=0; $i < count($stringUsuario); $i++) { 
 				$auxUsuario[$i] = str_replace("'", "",trim($stringUsuario[$i]));
-
 			}
 
 			if ($auxUsuario[0] != "") {
@@ -42,6 +41,5 @@ class Login
 		fclose($archivo);
 		return $ListaDeUsuarios;
 	}
-
 }
  ?>

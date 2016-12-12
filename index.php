@@ -1,20 +1,18 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>Login Ingreso</title>
 <?php 
 session_start();
 if (isset($_SESSION['user'])) {
 	$U = json_decode($_SESSION['user']);
-	echo '<div class="alert alert-info animated fadeInDown" role="alert"> <strong>Session: </strong> Usuario: '.$U->_usuario.' Tipo: '.$U->_tipo.'. <input type="button" name="button" value="Login Out" class="btn btn-danger btn-sm animated fadeInDown " onclick="LoginOut()"> </div>';
+	echo '<div class="alert alert-info animated fadeInLeft" role="alert"> <strong>Session: </strong> Usuario: '.$U->_usuario.' Tipo: '.$U->_tipo.'. <input type="button" name="button" value="Login Out" class="btn btn-danger btn-sm animated fadeInDown " onclick="LoginOut()"> </div>';
 }
 if (isset($_COOKIE['user'])) {
 	$u = json_decode($_COOKIE['user']);
 	echo '<div class="alert alert-success animated fadeInLeft" role="alert"> <strong>Ultima Coneccón: </strong> Usuario: '.$u->_usuario.' Tipo: '.$u->_tipo.'. <input type="button" name="button" value="Sacar" class="btn btn-success btn-sm animated fadeInDown" onclick="SacarCookie()"> </div>';	
 }
-
  ?>
-
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Login Ingreso</title>
  </head>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -35,8 +33,8 @@ if (isset($_COOKIE['user'])) {
 					<legend> 						
 						<h1> 
 							<strong>LOGIN </strong>
-							<input type="button" name="button" value="comprador" class="btn btn-info btn-xs animated fadeInDown" onclick="comprador()">
 							<input type="button" name="button" value="administrador" class="btn btn-primary btn-xs animated fadeInDown" onclick="administrador()">
+							<input type="button" name="button" value="comprador" class="btn btn-info btn-xs animated fadeInDown" onclick="comprador()">
 							<input type="button" name="button" value="vendedor" class="btn btn-default btn-xs animated fadeInDown" onclick="vendedor()">
 						</h1>
 					</legend>
