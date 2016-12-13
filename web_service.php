@@ -50,6 +50,25 @@
 	}
 ///**********************************************************************************************************///
 
+//REGISTRO METODO CON PARAMETRO DE ENTRADA COMPLEJO Y PARAMETRO DE SALIDA 'SIMPLE'
+	$server->register('ModificarMaterial',                	
+						array('Material' => 'tns:Material'),  
+						array('return' => 'xsd:string'),   
+						'urn:wsMaterialesTXT',                		
+						'urn:wsMaterialesTXT#SaludarPersona',             
+						'rpc',                        		
+						'encoded',                    		
+						'Intertar un Material'    			
+					);
+
+
+	function ModificarMaterial($p) {
+		$material = new MaterialesTXT($p['Nombre'], $p['Precio'],$p['Tipo']);
+
+		return $material->InsertarMaterial();
+	}
+///**********************************************************************************************************///
+
 //REGISTRO METODO SIN PARAMETRO DE ENTRADA Y PARAMETRO DE SALIDA 'ARRAY de ARRAYS'
 	$server->register('ObtenerTodosLosMateriales',                	
 						array(),  

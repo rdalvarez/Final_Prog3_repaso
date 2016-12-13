@@ -114,7 +114,6 @@ function CargarForm(){
 	.then( 
 		function bien(respuesta){
 			$("#divAbm").html(respuesta);
-        	$('#cboPerfiles > option[value="usuario"]').attr('selected', 'selected');
 		}
 		,
 		function mal(jqXHR, textStatus, errorThrown) {
@@ -152,7 +151,7 @@ function NuevoMaterial(){
 				return;
 			}
 			alert("BIEN: "+respuesta.mensaje);
-			$("#divAbm").val("");
+			$("#divAbm").html("");
 			Grilla();
 		}
 		,
@@ -160,4 +159,59 @@ function NuevoMaterial(){
         	console.log("ERROR:\n"+jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
 		}
 	);
+}
+function FrmModificar(obj){ //solo modifico el alta con jquery :)
+	//console.log(obj);
+	CargarForm();
+	setTimeout(function(){  // incluyo delay - form tarda mas 
+		$('#nombre').val(obj.nombre);
+		$('#precio').val(obj.precio);
+		$('#tipo').val(obj.tipo);
+
+		$('#agregar').text("Modificar");
+		$("#agregar").attr("onclick","Modificar()");
+		$("#titulo").text("Modificación");;
+	}, 5);
+
+}
+function Modificar(){
+	var nombre = $('#nombre').val();
+	var precio = $('#precio').val();
+	var tipo = $('#tipo').val();
+
+	var pagina = "nexo.php";
+	var material = {nombre: nombre, precio: precio, tipo: tipo};
+	var queHago = "MODIFICAR";
+
+	$.ajax({
+		type: "POST",
+		url: pagina,
+		data: {
+			material: material, 
+			queHago: queHago
+		},
+		dataType: "json",
+		async: true
+	})
+	.then( 
+		function bien(respuesta){
+
+			if (!respuesta.exito) {
+				alert("ERROR: " + respuesta.mensaje);					
+				$("#nombre").val("");
+				$("#precio").val("");
+				return;
+			}
+			alert("BIEN: "+respuesta.mensaje);
+			$("#divAbm").html("");
+			Grilla();
+		}
+		,
+		function mal(jqXHR, textStatus, errorThrown) {
+        	console.log("ERROR:\n"+jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+		}
+	);
+}
+function Eliminar(obj){
+	
 }

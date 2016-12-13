@@ -4,7 +4,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title">Ingrese Material <small>Alta</small></h3>
+                    <h3 class="panel-title">Ingrese Material <small id="titulo">Alta</small></h3>
                 </div>
 
                 <div class="panel-body">
@@ -25,7 +25,7 @@
                             </select>
                           </div>
 
-                        <button type="button" class="btn btn-info btn-block" onclick="NuevoMaterial()">Agregar</button>
+                        <button type="button" id="agregar" class="btn btn-info btn-block" onclick="NuevoMaterial()">Agregar</button>
                     </form>
                 </div>
             </div>

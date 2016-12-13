@@ -43,11 +43,11 @@ $host = 'http://localhost/php/web_service.php';
 		var arr = '.json_encode($arrMateriales).';
 
 
-		function boton(id,accion){
+		function boton(obj,accion){
             if (accion == 1) {
-                Modificar();
+                FrmModificar(obj);
             }else
-                Eliminar();
+                Eliminar(obj);
         }');
 	?>
 </script>
@@ -73,19 +73,19 @@ $host = 'http://localhost/php/web_service.php';
                     	</thead>
 						<tbody>
 	                        <?php
-	                        foreach ($arrMateriales as $material) 
-	                        {
-	                            $fila ='<tr>';
-	                            $fila.='<td class="text-left scope="row"">'.$material['id'].'</td>';
-	                            $fila.='<td class="text-left">'.$material['nombre'].'</td>';
-	                            $fila.='<td class="text-left">'.$material['precio'].'</td>';
-	                            $fila.='<td class="text-left">'.$material['tipo'].'</td>';
+	                        for ($i=0; $i < count($arrMateriales); $i++) { 
+	                        	$fila ='<tr>';
+	                            $fila.='<td class="text-left scope="row"">'.$arrMateriales[$i]['id'].'</td>';
+	                            $fila.='<td class="text-left">'.$arrMateriales[$i]['nombre'].'</td>';
+	                            $fila.='<td class="text-left">'.$arrMateriales[$i]['precio'].'</td>';
+	                            $fila.='<td class="text-left">'.$arrMateriales[$i]['tipo'].'</td>';
 	                            $fila.='<td class="text-center">';
-	                            $fila.='<a data-toggle="tooltip" onclick="boton('.$material['id'].',1)" class="btn btn-info btn-xs" title="EDITAR"><span class="glyphicon glyphicon-pencil"></span></a> ';
-	                            $fila.= '<a data-toggle="tooltip" onclick="boton('.$material['id'].',2)" class="btn btn-danger btn-xs" title="BORRAR"><span class="glyphicon glyphicon-trash"></span></a>';
+	                            $fila.='<a data-toggle="tooltip" onclick="boton(arr['.$i.'],1)" class="btn btn-info btn-xs" title="EDITAR"><span class="glyphicon glyphicon-pencil"></span></a> ';
+	                            $fila.= '<a data-toggle="tooltip" onclick="boton(arr['.$i.'],2)" class="btn btn-danger btn-xs" title="BORRAR"><span class="glyphicon glyphicon-trash"></span></a>';
 	                            $fila.='</td></tr>';
-	                            echo $fila;   
+	                            echo $fila;
 	                        }
+	                        
 	                        ?>
 						</tbody>
                     </table>

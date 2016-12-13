@@ -4,4 +4,5 @@
 4 - mesa - 2 - liquido
 5 - silla - 4 - liquido
 6 - test - 1234 - solido
+7 - test2 - 45 - liquido
 

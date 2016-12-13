@@ -63,16 +63,17 @@ class MaterialesTXT
 	}
 	public static function TraerTodosLosMateriales(){
 		$arrMateriales = array();
-		$a = fopen("BD/materiales.txt", "r"); //BD/materiales.txt si llamo directo
+		$a = fopen("BD/materiales.txt", "r");
 		while (!feof($a)) {
 			$arr = explode(" - ", fgets($a));
 			if (count($arr) > 1) {
 				$material = array();
-				$material['id'] = $arr[0];
+				$material['id'] = trim($arr[0]);
 				$material['nombre'] = $arr[1];
 				$material['precio'] = $arr[2];
 				$material['tipo'] = trim($arr[3]);
 
+				//WB NO LE GUSTA
 				// $material = new MaterialesTXT();
 				// $material->id = $arr[0];
 				// $material->nombre = $arr[1];
@@ -85,8 +86,9 @@ class MaterialesTXT
 		fclose($a);
 		return $arrMateriales;
 	}
+	public function ModificarMaterial($obj){
+		$arrMaterialesLeidos = MaterialesTXT::TraerTodosLosMateriales();
+	}
 
 }
-
-
 ?>
