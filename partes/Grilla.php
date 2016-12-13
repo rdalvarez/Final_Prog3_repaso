@@ -37,9 +37,9 @@ $host = 'http://localhost/php/SERVIDOR/web_service.php';
 		}
 ?>
 
-script type="text/javascript">
-	<?php 
-	echo ('
+<script type="text/javascript">
+
+	<?php 	echo ('
 		var arr = '.json_encode($arrMateriales).';
 
 
