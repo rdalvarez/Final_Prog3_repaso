@@ -67,17 +67,17 @@ class MaterialesTXT
 		while (!feof($a)) {
 			$arr = explode(" - ", fgets($a));
 			if (count($arr) > 1) {
-				// $material = array();
-				// $material['id'] = $arr[0];
-				// $material['nombre'] = $arr[1];
-				// $material['precio'] = $arr[2];
-				// $material['tipo'] = trim($arr[3]);
+				$material = array();
+				$material['id'] = $arr[0];
+				$material['nombre'] = $arr[1];
+				$material['precio'] = $arr[2];
+				$material['tipo'] = trim($arr[3]);
 
-				$material = new MaterialesTXT();
-				$material->id = $arr[0];
-				$material->nombre = $arr[1];
-				$material->precio = $arr[2];
-				$material->tipo = $arr[3];
+				// $material = new MaterialesTXT();
+				// $material->id = $arr[0];
+				// $material->nombre = $arr[1];
+				// $material->precio = $arr[2];
+				// $material->tipo = $arr[3];
 
 				array_push($arrMateriales, $material);
 			}
