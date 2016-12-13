@@ -1,27 +1,57 @@
 <?php
-require_once 'materiales.php';
+//DIRECTO DE LA CLASE------------------------------------------------//
+require_once 'clases/materiales.php';
+$arrMateriales2 = MaterialesTXT::TraerTodosLosMateriales();
+var_dump($arrMateriales2);
+//USANDO WEB_SERVICE-------------------------------------------------//
 
-$arrMateriales = MaterialesTXT::TraerTodosLosMateriales();
+require_once('SERVIDOR/lib/nusoap.php');
 
+$host = 'http://localhost/php/SERVIDOR/web_service.php';
+
+		$client = new nusoap_client($host . '?wsdl');
+
+		$err = $client->getError();
+		if ($err) {
+			echo '<h2>ERROR EN LA CONSTRUCCION DEL WS:</h2><pre>' . $err . '</pre>';
+			die();
+		}
+
+//INVOCO AL METODO DE MI WS		
+		$arrMateriales = $client->call('ObtenerTodosLosMateriales', array());
+
+		if ($client->fault) {
+			echo '<h2>ERROR AL INVOCAR METODO:</h2><pre>';
+			print_r($arrMateriales);
+			echo '</pre>';
+		} else {
+			$err = $client->getError();
+			if ($err) {
+				echo '<h2>ERROR EN EL CLIENTE:</h2><pre>' . $err . '</pre>';
+			} 
+			else {
+				echo '<h2>Resultado</h2>';
+				echo '<pre>' . var_dump($arrMateriales) . '</pre>';
+				echo '<br/>';
+			}
+		}
 ?>
-<script type="text/javascript">
-	<?php 
+
+<!-- <script type="text/javascript">
+	<?php /*
 	echo ('
 		var arr = '.json_encode($arrMateriales).';
 
 
 		function boton(id,accion){
             if (accion == 1) {
-                arr[id].accion = "Modificar";
+                Modificar();
             }else
-                arr[id].accion = "Eliminar";
-
-            //console.log(arr[id]);           
-            EditarUsuario(arr[id]);
-        }'); 
+                Eliminar();
+        }');*/ 
 	?>
-</script>
-<div class="container animated slideUp">
+</script> -->
+<!-- <div class="container animated slideUp">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
@@ -63,4 +93,4 @@ $arrMateriales = MaterialesTXT::TraerTodosLosMateriales();
             </div>
         </div>
     </div>
-</div>
+</div> -->

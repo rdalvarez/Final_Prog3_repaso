@@ -16,23 +16,30 @@
 <body>
 
 <?php
+session_start();
 if (isset($_COOKIE['user'])) {
 	$u = json_decode($_COOKIE['user']);
 	echo '<div class="alert alert-success animated fadeInLeft" role="alert"> <strong>Ultima Coneccón: </strong> Usuario: '.$u->_usuario.' Tipo: '.$u->_tipo.'. <input type="button" name="button" value="Sacar" class="btn btn-success btn-sm animated fadeInDown" onclick="SacarCookie()"> </div>';	
 }
-session_start();
 if (isset($_SESSION['user'])) {
 	$U = json_decode($_SESSION['user']);
 	echo '<div class="alert alert-info animated fadeInLeft" role="alert"> <strong>Session: </strong> Usuario: '.$U->_usuario.' Tipo: '.$U->_tipo.'. <input type="button" name="button" value="Login Out" class="btn btn-danger btn-sm animated fadeInDown " onclick="LoginOut()"> </div>';
 
+	echo '<script type="text/javascript">Grilla();</script>';
 
-	include_once 'partes/Grilla.php';
 }
 else
 {
-	include_once 'partes/FrmLogin.php';
+	echo '<script type="text/javascript">Login();</script>';
 }
+
+
  ?>
-<div id="divAbm"  style="border-style:none;float:left;width:30%"></div>
+ <div id="alerta"></div>
+
+<div id="cuerpo"></div>
+ <div id="divAbm"  style="border-style:none;float:left;width:30%"></div>
+
+
 </body>
 </html>

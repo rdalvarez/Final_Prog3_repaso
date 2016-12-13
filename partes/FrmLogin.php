@@ -37,8 +37,7 @@
 					</div>
 					<div class="form-group text-center">
 						<input type="submit" name="submit" id="submit" class="btn btn-success btn-lg" value="Ingresar">
-					</div>
-					<div id="alerta"></div>
+					</div>					
 				</form>
 			</div>
 		</div>

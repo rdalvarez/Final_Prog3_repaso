@@ -1,16 +1,31 @@
-/*function FrmIngreso(){
+function Grilla(){
 	var pagina = "nexo.php";
-	var queHago = "FORM_INGRESO";
+	var queHago = "GRILLA";
 	$.ajax({
         url:"nexo.php",
         type:"post",
         data: {queHago: queHago} 
     })
     .then(function(retorno){
-        $("body").append(retorno);       
+        $("#cuerpo").html(retorno);       
+    },
+		function mal(jqXHR, textStatus, errorThrown) {
+        	console.log("ERROR:\n"+jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+		}
+    );
+}
+function Login(){
+	var pagina = "nexo.php";
+	var queHago = "LOGIN";
+	$.ajax({
+        url:"nexo.php",
+        type:"post",
+        data: {queHago: queHago} 
+    })
+    .then(function(retorno){
+        $("#cuerpo").html(retorno);       
     });
-}*/
-
+}
 function Ingreso(){
 	var pagina = "nexo.php";
 	var queHago = "INGRESO";
@@ -31,7 +46,7 @@ function Ingreso(){
 		function bien(respuesta){
 
 			if (!respuesta.exito) {
-				var html = '<div id="aux" class="alert alert-danger animated fadeInDown" role="alert"> <strong>Error!</strong> '+respuesta.mensaje+'.</div>';
+				var html = '<div class="alert alert-danger animated fadeInDown" role="alert"> <strong>Error!</strong> '+respuesta.mensaje+'.</div>';
 				$("#alerta").html(html);
 				setTimeout(
 					function(){
@@ -48,7 +63,6 @@ function Ingreso(){
 			setTimeout(function(){ 
 				$("#alerta").html(""); 
 				$('#submit').attr("disabled", false);
-				$('body').html("");
 				location.reload();
 			}, 3000);
 		}
@@ -114,5 +128,35 @@ function NuevoMaterial(){
 	var precio = $('#precio').val();
 	var tipo = $('#tipo').val();
 
-	alert(nombre+precio+tipo);
+	var pagina = "nexo.php";
+	var material = {nombre: nombre, precio: precio, tipo: tipo};
+	var queHago = "ALTA";
+
+	$.ajax({
+		type: "POST",
+		url: pagina,
+		data: {
+			material: material, 
+			queHago: queHago
+		},
+		dataType: "json",
+		async: true
+	})
+	.then( 
+		function bien(respuesta){
+
+			if (!respuesta.exito) {
+				alert("ERROR: " + respuesta.mensaje);					
+				$("#nombre").val("");
+				$("#precio").val("");
+				return;
+			}
+			alert("BIEN: "+respuesta.mensaje);
+			Grilla();
+		}
+		,
+		function mal(jqXHR, textStatus, errorThrown) {
+        	console.log("ERROR:\n"+jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+		}
+	);
 }

@@ -5,7 +5,7 @@ $respuesta['mensaje'] = "";
 
 switch ($_POST['queHago']) {
 	case 'INGRESO':
-			require_once 'login.php';
+			require_once 'clases/login.php';
 
 			if (!isset($_POST['login']['usuario']) && !isset($_POST['login']['contraseña'])) {
 				$respuesta['mensaje'] = "Se necesitan todos los campos.";
@@ -44,12 +44,52 @@ switch ($_POST['queHago']) {
 		break;
 	
 	case "FORM_ALTA":
-        require_once("partes/form.php");
+		require_once("partes/form.php");
+		break;
 
+	case "GRILLA":
+		include_once("partes/Grilla.php");
+		break;
+
+	case "LOGIN":
+		require_once("partes/FrmLogin.php");
+		break;
+
+	case "ALTA":
+		require_once 'clases/materiales.php';
+			
+		if (!isset($_POST['material']['nombre']) && !isset($_POST['material']['precio'])) {
+				$respuesta['mensaje'] = "Se necesitan todos los campos.";
+				echo json_encode($respuesta);
+				return;
+			}
+
+		$nombre = $_POST['material']['nombre'];
+		$precio = $_POST['material']['precio'];
+		$tipo = $_POST['material']['tipo'];
+
+		if ($nombre == "" && $precio == "") {
+			$respuesta['mensaje'] = "Se necesitan todos los campos.";
+			echo json_encode($respuesta);
+			return;
+		}
+
+		$obj = new MaterialesTXT($nombre,$precio,$tipo);
+
+		if ($obj->InsertarMaterial()) {
+			$respuesta['exito']=true;
+			$respuesta['mensaje']="OK alta . . . ";
+		}
+		else
+		{
+			$respuesta['mensaje'] = "Error al ingresar el material.";
+		}
+
+		echo json_encode($respuesta);
 		break;
 
 	default:
-		# code...
+		echo ":(";
 		break;
 }
  ?>
