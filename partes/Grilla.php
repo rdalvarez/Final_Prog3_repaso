@@ -5,9 +5,9 @@
 // var_dump($arrMateriales2);
 //USANDO WEB_SERVICE-------------------------------------------------//
 
-require_once('SERVIDOR/lib/nusoap.php');
+require_once('lib/nusoap.php');
 
-$host = 'http://localhost/php/SERVIDOR/web_service.php';
+$host = 'http://localhost/php/web_service.php';
 
 		$client = new nusoap_client($host . '?wsdl');
 

@@ -63,7 +63,7 @@ class MaterialesTXT
 	}
 	public static function TraerTodosLosMateriales(){
 		$arrMateriales = array();
-		$a = fopen("../BD/materiales.txt", "r");
+		$a = fopen("BD/materiales.txt", "r"); //BD/materiales.txt si llamo directo
 		while (!feof($a)) {
 			$arr = explode(" - ", fgets($a));
 			if (count($arr) > 1) {

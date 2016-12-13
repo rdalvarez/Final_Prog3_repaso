@@ -152,6 +152,7 @@ function NuevoMaterial(){
 				return;
 			}
 			alert("BIEN: "+respuesta.mensaje);
+			$("#divAbm").val("");
 			Grilla();
 		}
 		,
