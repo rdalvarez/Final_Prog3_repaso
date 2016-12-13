@@ -10,7 +10,7 @@
 
 //AGREGO TIPO COMPLEJO, INFORMANDO SU ESTRUCTURA	
 	$server->wsdl->addComplexType(
-									'Materiales',
+									'Material',
 									'complexType',
 									'struct',
 									'all',
@@ -32,24 +32,21 @@
 								);
 ///**********************************************************************************************************///								
 //REGISTRO METODO CON PARAMETRO DE ENTRADA COMPLEJO Y PARAMETRO DE SALIDA 'SIMPLE'
-	$server->register('SaludarPersona',                	
-						array('Persona' => 'tns:Persona'),  
+	$server->register('AltaMaterial',                	
+						array('Material' => 'tns:Material'),  
 						array('return' => 'xsd:string'),   
-						'urn:testWSDL',                		
-						'urn:testWSDL#SaludarPersona',             
+						'urn:wsMaterialesTXT',                		
+						'urn:wsMaterialesTXT#SaludarPersona',             
 						'rpc',                        		
 						'encoded',                    		
-						'Saluda a una persona'    			
+						'Intertar un Material'    			
 					);
 
 
-	function SaludarPersona($p) {
+	function AltaMaterial($p) {
+		$material = new MaterialesTXT($p['Nombre'], $p['Precio'],$p['Tipo']);
 
-		$saludo = 'Hola, ' . $p['Nombre'] .
-		' tu edad es de ' . $p['Edad'] .
-		' a&ntilde;os y eres ' . $p['Sexo'] . '.';
-		
-		return $saludo;
+		return $material->InsertarMaterial();
 	}
 ///**********************************************************************************************************///
 

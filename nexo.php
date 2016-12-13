@@ -57,7 +57,9 @@ switch ($_POST['queHago']) {
 
 	case "ALTA":
 		require_once 'clases/materiales.php';
-			
+		
+		//VALIDACION-------------------------------------------------//
+
 		if (!isset($_POST['material']['nombre']) && !isset($_POST['material']['precio'])) {
 				$respuesta['mensaje'] = "Se necesitan todos los campos.";
 				echo json_encode($respuesta);
@@ -68,22 +70,55 @@ switch ($_POST['queHago']) {
 		$precio = $_POST['material']['precio'];
 		$tipo = $_POST['material']['tipo'];
 
+		//var_dump($nombre); var_dump($precio); var_dump($tipo);
+
 		if ($nombre == "" && $precio == "") {
 			$respuesta['mensaje'] = "Se necesitan todos los campos.";
 			echo json_encode($respuesta);
 			return;
 		}
+		//-----------------------------------------------------------//
+		//WEB SERVICE------------------------------------------------//
+		require_once('lib/nusoap.php');
 
-		$obj = new MaterialesTXT($nombre,$precio,$tipo);
+		$host = 'http://localhost/php/web_service.php';
 
-		if ($obj->InsertarMaterial()) {
-			$respuesta['exito']=true;
-			$respuesta['mensaje']="OK alta . . . ";
+		$proxyhost = isset($_POST['proxyhost']) ? $_POST['proxyhost'] : '';
+		$proxyport = isset($_POST['proxyport']) ? $_POST['proxyport'] : '';
+		$proxyusername = isset($_POST['proxyusername']) ? $_POST['proxyusername'] : '';
+		$proxypassword = isset($_POST['proxypassword']) ? $_POST['proxypassword'] : '';
+		
+		$client = new nusoap_client($host . '?wsdl', true, $proxyhost, $proxyport, 
+										$proxyusername, $proxypassword);
+
+		$err = $client->getError();
+		if ($err) {
+			echo '<h2>ERROR EN LA CONSTRUCCION DEL WS:</h2><pre>' . $err . '</pre>';
+			die();
 		}
-		else
-		{
-			$respuesta['mensaje'] = "Error al ingresar el material.";
+
+		//VARIABLE ENTRADA
+		$material = array('Nombre' => $nombre, 'Precio' => $precio, 'Tipo' => $tipo);
+
+		//INVOCO AL METODO DE MI WS		
+		$result = $client->call('AltaMaterial', array('Material' => $material));
+
+		if ($client->fault) {
+			echo '<h2>ERROR AL INVOCAR METODO:</h2><pre>';
+			print_r($result);
+			echo '</pre>';
+		} else {
+			$err = $client->getError();
+			if ($err) {
+				$respuesta['mensaje'] = '<h2>ERROR EN EL CLIENTE:</h2><pre>' . $err . '</pre>';
+			} 
+			else {
+				$respuesta['exito']=true;
+				$respuesta['mensaje']="OK alta . . . ".$result;
+			}
 		}
+		
+		//-----------------------------------------------------------//
 
 		echo json_encode($respuesta);
 		break;

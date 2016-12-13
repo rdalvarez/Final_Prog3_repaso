@@ -3,4 +3,5 @@
 3 - mesa - 20 - solido
 4 - mesa - 2 - liquido
 5 - silla - 4 - liquido
+6 - test - 1234 - solido
 
