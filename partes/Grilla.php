@@ -30,9 +30,9 @@ $host = 'http://localhost/php/SERVIDOR/web_service.php';
 				echo '<h2>ERROR EN EL CLIENTE:</h2><pre>' . $err . '</pre>';
 			} 
 			else {
-				echo '<h2>Resultado</h2>';
-				echo '<pre>' . var_dump($arrMateriales) . '</pre>';
-				echo '<br/>';
+				// echo '<h2>Resultado</h2>';
+				// echo '<pre>' . var_dump($arrMateriales) . '</pre>';
+				// echo '<br/>';
 			}
 		}
 ?>
