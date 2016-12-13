@@ -37,8 +37,8 @@ $host = 'http://localhost/php/SERVIDOR/web_service.php';
 		}
 ?>
 
-<!-- <script type="text/javascript">
-	<?php /*
+script type="text/javascript">
+	<?php 
 	echo ('
 		var arr = '.json_encode($arrMateriales).';
 
@@ -48,10 +48,10 @@ $host = 'http://localhost/php/SERVIDOR/web_service.php';
                 Modificar();
             }else
                 Eliminar();
-        }');*/ 
+        }');
 	?>
-</script> -->
-<!-- <div class="container animated slideUp">
+</script>
+<div class="container animated slideUp">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
@@ -76,13 +76,13 @@ $host = 'http://localhost/php/SERVIDOR/web_service.php';
 	                        foreach ($arrMateriales as $material) 
 	                        {
 	                            $fila ='<tr>';
-	                            $fila.='<td class="text-left scope="row"">'.$material->id.'</td>';
-	                            $fila.='<td class="text-left">'.$material->nombre.'</td>';
-	                            $fila.='<td class="text-left">'.$material->precio.'</td>';
-	                            $fila.='<td class="text-left">'.$material->tipo.'</td>';
+	                            $fila.='<td class="text-left scope="row"">'.$material['id'].'</td>';
+	                            $fila.='<td class="text-left">'.$material['nombre'].'</td>';
+	                            $fila.='<td class="text-left">'.$material['precio'].'</td>';
+	                            $fila.='<td class="text-left">'.$material['tipo'].'</td>';
 	                            $fila.='<td class="text-center">';
-	                            $fila.='<a data-toggle="tooltip" onclick="boton('.$material->id.',1)" class="btn btn-info btn-xs" title="EDITAR"><span class="glyphicon glyphicon-pencil"></span></a> ';
-	                            $fila.= '<a data-toggle="tooltip" onclick="boton('.$material->id.',2)" class="btn btn-danger btn-xs" title="BORRAR"><span class="glyphicon glyphicon-trash"></span></a>';
+	                            $fila.='<a data-toggle="tooltip" onclick="boton('.$material['id'].',1)" class="btn btn-info btn-xs" title="EDITAR"><span class="glyphicon glyphicon-pencil"></span></a> ';
+	                            $fila.= '<a data-toggle="tooltip" onclick="boton('.$material['id'].',2)" class="btn btn-danger btn-xs" title="BORRAR"><span class="glyphicon glyphicon-trash"></span></a>';
 	                            $fila.='</td></tr>';
 	                            echo $fila;   
 	                        }
@@ -93,4 +93,4 @@ $host = 'http://localhost/php/SERVIDOR/web_service.php';
             </div>
         </div>
     </div>
-</div> -->
+</div>
