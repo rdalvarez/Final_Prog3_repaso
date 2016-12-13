@@ -1,3 +1,16 @@
+/*function FrmIngreso(){
+	var pagina = "nexo.php";
+	var queHago = "FORM_INGRESO";
+	$.ajax({
+        url:"nexo.php",
+        type:"post",
+        data: {queHago: queHago} 
+    })
+    .then(function(retorno){
+        $("body").append(retorno);       
+    });
+}*/
+
 function Ingreso(){
 	var pagina = "nexo.php";
 	var queHago = "INGRESO";
@@ -11,7 +24,8 @@ function Ingreso(){
 			login: login, 
 			queHago: queHago
 		},
-		dataType: "json"
+		dataType: "json",
+		async: true
 	})
 	.then( 
 		function bien(respuesta){
@@ -51,7 +65,8 @@ function LoginOut(){
 	$.ajax({
         url:"nexo.php",
         type:"post",
-        data: {queHago: queHago} 
+        data: {queHago: queHago} ,
+        async: true
     })
     .then(function(retorno){
         location.reload();       
@@ -69,4 +84,35 @@ function SacarCookie(){
     .then(function(retorno){    	
     	location.reload();  
     }); 
+}
+function CargarForm(){
+	var pagina = "nexo.php";
+	var queHago = "FORM_ALTA";
+
+	$.ajax({
+		type: "POST",
+		url: pagina,
+		data: {
+			queHago: queHago
+		},
+		async: true
+	})
+	.then( 
+		function bien(respuesta){
+			$("#divAbm").html(respuesta);
+        	$('#cboPerfiles > option[value="usuario"]').attr('selected', 'selected');
+		}
+		,
+		function mal(jqXHR, textStatus, errorThrown) {
+        	console.log("ERROR:\n"+jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+		}
+	);
+	
+}
+function NuevoMaterial(){
+	var nombre = $('#nombre').val();
+	var precio = $('#precio').val();
+	var tipo = $('#tipo').val();
+
+	alert(nombre+precio+tipo);
 }

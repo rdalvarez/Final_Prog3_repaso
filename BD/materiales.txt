@@ -1,0 +1,4 @@
+1 - madera - 10 - solido
+2 - metal - 20 - solido
+3 - mesa - 20 - solido
+

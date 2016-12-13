@@ -43,7 +43,8 @@ switch ($_POST['queHago']) {
 		setcookie("user", "", time() - 3600);
 		break;
 	
-	case "":
+	case "FORM_ALTA":
+        require_once("partes/form.php");
 
 		break;
 
