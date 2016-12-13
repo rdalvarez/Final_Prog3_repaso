@@ -1,8 +1,8 @@
 <?php
 //DIRECTO DE LA CLASE------------------------------------------------//
-require_once 'clases/materiales.php';
-$arrMateriales2 = MaterialesTXT::TraerTodosLosMateriales();
-var_dump($arrMateriales2);
+// require_once 'clases/materiales.php';
+// $arrMateriales2 = MaterialesTXT::TraerTodosLosMateriales();
+// var_dump($arrMateriales2);
 //USANDO WEB_SERVICE-------------------------------------------------//
 
 require_once('SERVIDOR/lib/nusoap.php');
